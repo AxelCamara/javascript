@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Carrito</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+<script src="js/carrito.js" defer></script>
+</head>
+<body>
+<header class="header-carrito">
+    <h1>Carrito de Compras</h1>
+    <a href="index.html">Seguir comprando</a>
+</header>
+
+<main class="main-carrito">
+    <section id="detalle-carrito"></section>
+
+    <div class="resumen">
+        <p>Total de productos: <span id="cantidad"></span></p>
+        <p>Total a pagar: $<span id="total"></span></p>
+        <button id="vaciar-carrito">Vaciar carrito</button>
+    </div>
+
+    <section class="seccion-formulario">
+        <div class="formulario-compra">
+            <h3>Completa tus datos</h3>
+            <form id="form-compra">
+                <label for="nombre">Nombre y Apellido:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit">Comprar</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025. Mi Celu Online - Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

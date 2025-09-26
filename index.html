@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Celu Online</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/script.js" defer></script>
 </head>
-<body>
+<body class="body-index">
   <header>
     <h1>Mi Celu Online</h1>
   <div class="carrito-conteiner">
-    <div id="historial-carrito"></div>
+    
 
     <div class="carrito-info">
       <p>Productos en carrito: <span id="contador">0</span></p>
@@ -21,8 +22,10 @@
   </header>
 
   <main>
-    <h2>PRODUCTOS DE CALIDAD</h2>
-
+    <div class="titulo-con-boton">
+      <h2>PRODUCTOS DE CALIDAD</h2>
+      <button id="ir-carrito" class="boton-carrito">Ir al carrito</button>
+    </div>
     <section class="productos"></section>
 
     <div class="carrito"></div>

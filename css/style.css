@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-body {
+.body-index {
     font-family: Arial, sans-serif;
     background: linear-gradient(rgba(255, 255, 255, 0.911), rgba(153, 153, 153, 0.884));
     color: #000000ce;
@@ -14,37 +14,14 @@ body {
 
 /* Header */
 header {
-    background: #ffffffec;
-    color: #42a1ee;
+    background: linear-gradient(#4f95ff, rgba(255, 255, 255, 0.37) ) ;
+    color: #ffffff;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.carrito-conteiner {
-    display: flex;
-    align-items: stretch;
-    gap: 1rem;
-}
-
-#historial-carrito {
-    max-width: 200px;
-    max-height: 100px;
-    overflow-y: auto;
-    background: #f8faffec;
-    padding: 0.5rem;
-    border-radius: 8px;
-    color: #42a1ee;
-    font-weight: bold;
-}
-
-.item-historial {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    margin-bottom: 0.2rem;
-}
 
 header h1 {
     font-size: 1.5rem;
@@ -73,6 +50,26 @@ main {
 h2 {
     text-align: center;
     margin-bottom: 1.5rem;
+}
+.titulo-con-boton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.boton-carrito {
+    padding: 1rem 1rem;
+    background: #4f95ff;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 1.2s;
+    font-weight: bolder;
+}
+
+.boton-carrito:hover {
+    background: #64b9ff;
 }
 
 .productos {
@@ -116,7 +113,7 @@ h2 {
 }
 
 button {
-    background: #0182b4;
+    background: #4f95ff;
     color: #fff;
     border: none;
     padding: 0.5rem 1rem;
@@ -137,4 +134,154 @@ footer {
     background: #ffffffab;
     color: #3c9eee;
     margin-top: 2rem;
+}
+/* header carrito */
+.header-carrito h1{
+    font-size: 50px;
+    font-family: Arial;
+}
+.header-carrito a{
+    font-weight: bolder;
+    font-family:  sans-serif;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: #4f95ff;
+    padding: 10px;
+    border-radius: 30px;
+}
+/* main carrito */
+.main-carrito {
+    font-weight: bolder;
+    font-size: 19px;
+    margin: 0;
+    padding: 0;
+
+}
+#detalle-carrito .item-carrito {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#detalle-carrito .item-carrito button {
+  margin-left: auto;
+}
+.resumen {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 60px;
+    padding-bottom: 20px;
+    background: linear-gradient(rgb(255, 255, 255),#418dff ) ;
+    color: rgb(255, 255, 255);
+    font-size: 27px;
+}
+.resumen button {
+    font-weight: bold;
+    font-size: 17px;
+    color: #4f95ff;
+    background: rgb(255, 255, 255);
+    margin-right: 30px;
+    padding: 20px;
+    border-radius: 30px;
+}
+/* formulario de compra */
+.seccion-formulario {
+    display: block;
+    background-color: #418dff;
+    margin: 0;
+    padding: 40px 0;
+}
+
+.formulario-compra {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+}
+
+.formulario-compra h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 1.5rem;
+}
+
+.formulario-compra label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #222;
+  font-weight: bold;
+}
+
+.formulario-compra input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 2px solid   #418dff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+.formulario-compra input:focus {
+  outline: none;
+  border-color: #29a0f0;
+  box-shadow: 0 0 6px #2194ff;
+}
+
+.formulario-compra button {
+  width: 100%;
+  background-color: #418dff;
+  color: #fff;
+  border: none;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.formulario-compra button:hover {
+  background-color: #2194ff;
+}
+
+/* Estilo para las alertas dinamicas */
+.swal2-popup {
+  background: linear-gradient(145deg, #2445ffe5, #3595e9);
+  border-radius: 15px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.swal2-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #418dff;
+}
+
+.swal2-html-container {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.swal2-confirm {
+  background-color: #418dff !important;
+  color: #ffffff !important;
+  font-weight: bold;
+  border-radius: 8px !important;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.swal2-icon.swal2-success,
+.swal2-icon.swal2-error,
+.swal2-icon.swal2-warning,
+.swal2-icon.swal2-info {
+  border-width: 4px;
+  color: red;
 }

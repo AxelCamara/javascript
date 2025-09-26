@@ -1,89 +1,105 @@
-const productos = [
-  { nombre: "Samsung Z Flip", precio: 1998000, imagen: "imagenes/galaxy_z_flip.avif" },
-  { nombre: "Samsung 25Ultra", precio: 2000000, imagen: "imagenes/s25_ultra.webp" },
-  { nombre: "Samsung 24Ultra", precio: 1998000, imagen: "imagenes/Samsung-Galaxy-S24-Ultra.png" },
-  { nombre: "Samsung Z Fold", precio: 1598000, imagen: "imagenes/galaxy_z_fold.avif" },
-  { nombre: "Samsung A21 s", precio: 1490000, imagen: "imagenes/galaxyA21s.png" },
-  { nombre: "Samsung s9", precio: 1150000, imagen: "imagenes/samsung_s9.png" },
-  { nombre: "Samsung s22", precio: 1700000, imagen: "imagenes/galaxy_s22.webp" },
-  { nombre: "Iphone 14Pro", precio: 2200000, imagen: "imagenes/iphone_14pro.webp" },
-  { nombre: "Iphone 15Plus", precio: 2380000, imagen: "imagenes/iphone_15plus.jpg" }
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedorProductos = document.querySelector(".productos");
+  const contadorSpan = document.getElementById("contador");
+  const totalSpan = document.getElementById("total");
+  const irCarritoBtn = document.getElementById("ir-carrito");
+
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let productos = [];
 
 
-const contenedorProductos = document.querySelector(".productos");
-const historialContenedor = document.getElementById("historial-carrito");
-const contadorSpan = document.getElementById("contador");
-const totalSpan = document.getElementById("total");
+  function mostrarMensaje({ icon = 'info', title = '', html = '', timer = 1500 }) {
+    Swal.fire({
+      icon,
+      title,
+      html,
+      showConfirmButton: false,
+      timer,
+      toast: true,
+      position: 'top-end'
+    });
+  }
 
-
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-
-function mostrarProductos() {
-  contenedorProductos.innerHTML = "";
-
-  productos.forEach((producto, index) => {
-    const card = document.createElement("article");
-    card.classList.add("producto");
-    card.innerHTML = `
-      <img src="${producto.imagen}" alt="${producto.nombre}">
-      <h3>${producto.nombre}</h3>
-      <p>Precio: $${(producto.precio).toLocaleString()}</p>
-      <button id="boton-${index}">Añadir al carrito</button>
-    `;
-    contenedorProductos.appendChild(card);
-
-    const boton = document.getElementById(`boton-${index}`);
-    boton.addEventListener("click", () => agregarAlCarrito(producto));
-  });
-}
-
-
-function agregarAlCarrito(producto) {
-  const existente = carrito.find(item => item.nombre === producto.nombre);
-  if (existente) {
-    existente.cantidad++;
-  } else {
-    carrito.push({ ...producto, cantidad: 1 });
+  async function cargarProductos() {
+    try {
+      const response = await fetch("data/productos.json");
+      if (!response.ok) throw new Error("Error al cargar productos");
+      productos = await response.json();
+      mostrarProductos();
+      actualizarResumen();
+    } catch (error) {
+      mostrarMensaje({ icon: 'error', title: 'No se pudieron cargar los productos' });
+      console.error(error);
+    }
   }
 
 
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+  function mostrarProductos() {
+    try {
+      contenedorProductos.innerHTML = "";
+      productos.forEach((producto, index) => {
+        const card = document.createElement("article");
+        card.classList.add("producto");
+        card.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <h3>${producto.nombre}</h3>
+          <p>Precio: $${producto.precio.toLocaleString()}</p>
+          <button id="boton-${index}">Añadir al carrito</button>
+        `;
+        contenedorProductos.appendChild(card);
+
+        const boton = document.getElementById(`boton-${index}`);
+        boton.addEventListener("click", () => agregarAlCarrito(producto));
+      });
+    } catch (error) {
+      mostrarMensaje({ icon: 'error', title: 'Error al mostrar productos' });
+      console.error(error);
+    }
+  }
 
 
-  actualizarResumen();
-  imprimirCarritoEnHTML(carrito);
-}
+  function agregarAlCarrito(producto) {
+    try {
+      const existente = carrito.find(item => item.nombre === producto.nombre);
+      if (existente) {
+        existente.cantidad++;
+      } else {
+        carrito.push({ ...producto, cantidad: 1 });
+      }
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      actualizarResumen();
+      mostrarMensaje({ icon: 'success', title: `${producto.nombre} agregado al carrito` });
+    } catch (error) {
+      mostrarMensaje({ icon: 'error', title: 'Error al agregar al carrito' });
+      console.error(error);
+    }
+  }
 
 
-function actualizarResumen() {
-  const cantidadTotal = carrito.reduce((total, item) => total + item.cantidad, 0);
-  const totalPrecio = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
-
-  contadorSpan.textContent = cantidadTotal;
-  totalSpan.textContent = totalPrecio.toLocaleString();
-}
-
-function imprimirCarritoEnHTML(carrito) {
-  historialContenedor.innerHTML = "";
-
-  carrito.forEach(item => {
-    const div = document.createElement("div");
-    div.classList.add("item-historial");
-    div.innerHTML = `
-      <span>${item.nombre} (x${item.cantidad})</span>
-      <span>$${(item.precio * item.cantidad).toLocaleString()}</span>
-    `;
-    historialContenedor.appendChild(div);
-  });
-}
+  function actualizarResumen() {
+    try {
+      const cantidadTotal = carrito.reduce((total, item) => total + item.cantidad, 0);
+      const totalPrecio = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
+      contadorSpan.textContent = cantidadTotal;
+      totalSpan.textContent = totalPrecio.toLocaleString();
+    } catch (error) {
+      mostrarMensaje({ icon: 'error', title: 'Error al actualizar resumen' });
+      console.error(error);
+    }
+  }
 
 
-mostrarProductos();
-actualizarResumen();
+  if (irCarritoBtn) {
+    irCarritoBtn.addEventListener("click", () => {
+      try {
+        window.location.href = "carrito.html";
+      } catch (error) {
+        mostrarMensaje({ icon: 'error', title: 'Error al abrir el carrito' });
+        console.error(error);
+      }
+    });
+  }
 
 
-if (carrito.length > 0) {
-  imprimirCarritoEnHTML(carrito);
-}
+  cargarProductos();
+});

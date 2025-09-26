@@ -1,0 +1,11 @@
+[
+  { "nombre": "Samsung Z Flip", "precio": 1998000, "imagen": "assets/imagenes/galaxy_z_flip.avif" },
+  { "nombre": "Samsung 25Ultra", "precio": 2000000, "imagen": "assets/imagenes/s25_ultra.webp" },
+  { "nombre": "Samsung 24Ultra", "precio": 1998000, "imagen": "assets/imagenes/Samsung-Galaxy-S24-Ultra.png" },
+  { "nombre": "Samsung Z Fold", "precio": 1598000, "imagen": "assets/imagenes/galaxy_z_fold.avif" },
+  { "nombre": "Samsung A21 s", "precio": 1490000, "imagen": "assets/imagenes/galaxyA21s.png" },
+  { "nombre": "Samsung s9", "precio": 1150000, "imagen": "assets/imagenes/samsung_s9.png" },
+  { "nombre": "Samsung s22", "precio": 1700000, "imagen": "assets/imagenes/galaxy_s22.webp" },
+  { "nombre": "Iphone 14Pro", "precio": 2200000, "imagen": "assets/imagenes/iphone_14pro.webp" },
+  { "nombre": "Iphone 15Plus", "precio": 2380000, "imagen": "assets/imagenes/iphone_15plus.jpg" }
+]
